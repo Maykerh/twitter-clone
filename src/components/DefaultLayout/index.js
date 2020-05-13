@@ -1,9 +1,10 @@
 import React from "react";
-
-import { AppContainer, Container, MenuContainer, Menu, MenuItem, ContentContainer } from "./styles";
-
 import { GrTwitter } from "react-icons/gr";
 import { AiOutlineUser, AiOutlineHome, AiOutlineFileSearch } from "react-icons/ai";
+
+import { primaryBlue } from "../../styles/variables";
+
+import { AppContainer, Container, MenuContainer, Menu, MenuItem, ContentContainer } from "./styles";
 
 function DefaultLayout({ children }) {
     return (
@@ -13,7 +14,7 @@ function DefaultLayout({ children }) {
                     <Menu>
                         <MenuItem>
                             <div>
-                                <GrTwitter size={25} color={"#1da1f2"} />
+                                <GrTwitter size={25} color={primaryBlue} />
                             </div>
                         </MenuItem>
                         <MenuItem>

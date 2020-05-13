@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import Header from "../components/Header";
+import DefaultLayout from "../components/DefaultLayout";
 
 import Home from "../pages/Home";
 import UserProfile from "../pages/UserProfile";
@@ -9,10 +9,10 @@ import UserProfile from "../pages/UserProfile";
 export default function Routes() {
     return (
         <Switch>
-            <Header>
+            <DefaultLayout>
                 <Route path="/" exact component={Home} />
                 <Route path="/user-profile" component={UserProfile} />
-            </Header>
+            </DefaultLayout>
         </Switch>
     );
 }

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { primaryBlue, secondaryBlue } from "../../styles/variables";
 
 export const AppContainer = styled.div`
     width: 100%;
@@ -13,19 +14,25 @@ export const Container = styled.div`
 export const MenuContainer = styled.div`
     display: flex;
     justify-content: flex-end;
-    flex: 1;
-    margin-left: -100px;
+    width: 33%;
+
+    @media (max-width: 1250px) {
+        width: 20%;
+    }
 `;
 
 export const ContentContainer = styled.div`
-    background-color: green;
     display: flex;
-    flex: 2;
+    width: 100%;
 `;
 
 export const Menu = styled.div`
-    width: 250px;
+    width: 200px;
     justify-self: flex-start;
+
+    @media (max-width: 1250px) {
+        width: 70px;
+    }
 `;
 
 export const MenuItem = styled.div`
@@ -35,7 +42,7 @@ export const MenuItem = styled.div`
     margin-bottom: 5px;
 
     > div {
-        padding: 0 15px;
+        padding: 0 10px;
         height: 100%;
         border-radius: 50px;
         display: inline-flex;
@@ -45,13 +52,17 @@ export const MenuItem = styled.div`
             font-size: 19px;
             font-weight: bold;
             margin-left: 15px;
+
+            @media (max-width: 1250px) {
+                display: none;
+            }
         }
 
         transition: all 0.2s;
     }
 
     > div:hover {
-        background-color: #e8f5fe;
-        color: #1da1f2;
+        background-color: ${secondaryBlue};
+        color: ${primaryBlue};
     }
 `;

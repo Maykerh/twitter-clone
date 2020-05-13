@@ -1,24 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import TweetCard from "../../components/TweetCard";
+import ContentLayout from "../../components/ContentLayout";
+import ContentHeader from "../../components/ContentHeader";
+import Timeline from "../../components/Timeline";
+import TweetInput from "../../components/TweetInput";
 
 import { Container, RightContainer, CenterContainer } from "./styles";
 
 const Home = props => {
-    console.log(props);
+    const Home = (
+        <div>
+            <ContentHeader title={"Home"} />
+            <TweetInput />
+            <Timeline />
+            {"HOOOOOOOOOME"} <Link to={"/user-profile"}>GO TO PROFILE</Link>
+        </div>
+    );
     return (
-        <Container>
-            <CenterContainer>
-                <TweetCard />
-                {"HOOOOOOOOOME"} <Link to={"/user-profile"}>GO TO PROFILE</Link>
-            </CenterContainer>
-            <RightContainer>
-                <div>
-                    <TweetCard />
-                </div>
-            </RightContainer>
-        </Container>
+        <ContentLayout
+            centerComponent={Home}
+            rightComponent={<div>{"COnteudo"}</div>}
+        ></ContentLayout>
     );
 };
 
