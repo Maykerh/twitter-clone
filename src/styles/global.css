@@ -10,3 +10,22 @@ body,
 #root {
     height: 100%;
 }
+
+#root {
+    overflow: hidden;
+}
+
+.ReactModal__Overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ReactModal__Content {
+    top: unset !important;
+    bottom: unset !important;
+    right: unset !important;
+    left: unset !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+}

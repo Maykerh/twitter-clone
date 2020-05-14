@@ -1,27 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import ContentLayout from "../../components/ContentLayout";
 import ContentHeader from "../../components/ContentHeader";
 import Timeline from "../../components/Timeline";
 import TweetInput from "../../components/TweetInput";
 
-import { Container, RightContainer, CenterContainer } from "./styles";
+import { Container, RightContainer, CenterContainer, ContentWrapper } from "./styles";
 
 const Home = props => {
-    const Home = (
+    function getAvatarUrl() {
+        return JSON.parse(localStorage.getItem("twt-profile")).avatarUrl;
+    }
+
+    function getUserName() {
+        return JSON.parse(localStorage.getItem("twt-profile")).name;
+    }
+
+    const HomeComponent = (
         <div>
             <ContentHeader title={"Home"} />
-            <TweetInput />
-            <Timeline />
-            {"HOOOOOOOOOME"} <Link to={"/user-profile"}>GO TO PROFILE</Link>
+            <ContentWrapper>
+                <TweetInput avatarUrl={getAvatarUrl()} name={getUserName()} />
+                <Timeline />
+            </ContentWrapper>
         </div>
     );
+
     return (
-        <ContentLayout
-            centerComponent={Home}
-            rightComponent={<div>{"COnteudo"}</div>}
-        ></ContentLayout>
+        <ContentLayout centerComponent={HomeComponent} rightComponent={<div>{"COnteudo"}</div>} />
     );
 };
 

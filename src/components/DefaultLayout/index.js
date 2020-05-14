@@ -1,44 +1,44 @@
-import React from "react";
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
+
 import { GrTwitter } from "react-icons/gr";
-import { AiOutlineUser, AiOutlineHome, AiOutlineFileSearch } from "react-icons/ai";
+import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
 
 import { primaryBlue } from "../../styles/variables";
 
-import { AppContainer, Container, MenuContainer, Menu, MenuItem, ContentContainer } from "./styles";
+import { AppContainer, MenuContainer, Menu, MenuItem, ContentContainer } from "./styles";
 
 function DefaultLayout({ children }) {
     return (
-        <AppContainer>
-            <Container>
-                <MenuContainer>
-                    <Menu>
-                        <MenuItem>
+        <AppContainer id={"app-container"}>
+            <MenuContainer>
+                <Menu>
+                    <MenuItem>
+                        <Link to={"/"}>
                             <div>
                                 <GrTwitter size={25} color={primaryBlue} />
                             </div>
-                        </MenuItem>
-                        <MenuItem>
+                        </Link>
+                    </MenuItem>
+                    <MenuItem>
+                        <Link to={"/"}>
                             <div>
                                 <AiOutlineHome size={32} />
                                 <span>Home</span>
                             </div>
-                        </MenuItem>
-                        <MenuItem>
-                            <div>
-                                <AiOutlineFileSearch size={32} />
-                                <span>Explore</span>
-                            </div>
-                        </MenuItem>
-                        <MenuItem>
+                        </Link>
+                    </MenuItem>
+                    <MenuItem>
+                        <Link to={"/user-profile"}>
                             <div>
                                 <AiOutlineUser size={32} />
                                 <span>Profile</span>
                             </div>
-                        </MenuItem>
-                    </Menu>
-                </MenuContainer>
-                <ContentContainer>{children}</ContentContainer>
-            </Container>
+                        </Link>
+                    </MenuItem>
+                </Menu>
+            </MenuContainer>
+            <ContentContainer id="scrollable-area">{children}</ContentContainer>
         </AppContainer>
     );
 }

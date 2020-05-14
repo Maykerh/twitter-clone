@@ -4,17 +4,14 @@ import { primaryBlue, secondaryBlue } from "../../styles/variables";
 export const AppContainer = styled.div`
     width: 100%;
     height: 100%;
-`;
-
-export const Container = styled.div`
     display: flex;
-    height: 100%;
 `;
 
 export const MenuContainer = styled.div`
     display: flex;
     justify-content: flex-end;
-    width: 33%;
+    width: 50%;
+    height: 100%;
 
     @media (max-width: 1250px) {
         width: 20%;
@@ -24,6 +21,8 @@ export const MenuContainer = styled.div`
 export const ContentContainer = styled.div`
     display: flex;
     width: 100%;
+    overflow: auto;
+    height: 100%;
 `;
 
 export const Menu = styled.div`
@@ -41,7 +40,12 @@ export const MenuItem = styled.div`
     cursor: pointer;
     margin-bottom: 5px;
 
-    > div {
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    a > div {
         padding: 0 10px;
         height: 100%;
         border-radius: 50px;
@@ -61,7 +65,7 @@ export const MenuItem = styled.div`
         transition: all 0.2s;
     }
 
-    > div:hover {
+    a > div:hover {
         background-color: ${secondaryBlue};
         color: ${primaryBlue};
     }

@@ -1,13 +1,13 @@
 import React from "react";
 
-import { Container, CenterContainer, RightContainer } from "./styles";
+import { CenterContainer, RightContainer } from "./styles";
 
 function ContentLayout({ centerComponent, rightComponent }) {
     return (
-        <Container>
+        <>
             <CenterContainer>{centerComponent}</CenterContainer>
             <RightContainer>{rightComponent}</RightContainer>
-        </Container>
+        </>
     );
 }
 

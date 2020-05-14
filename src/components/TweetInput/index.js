@@ -6,12 +6,12 @@ import Button from "../Button";
 
 import { Container, FooterOptions } from "./styles";
 
-function TweetInput() {
+function TweetInput({ avatarUrl, userName }) {
     const [tweet, setTweet] = useState("");
 
     return (
         <Container>
-            <Avatar />
+            <Avatar url={avatarUrl} name={userName} />
             <div id="input">
                 <TextareaAutosize
                     placeholder="What's happening?"

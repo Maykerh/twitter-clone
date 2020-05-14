@@ -1,22 +1,24 @@
 import styled from "styled-components";
 import { borderGray } from "../../styles/variables";
 
-export const Container = styled.div`
-    display: flex;
-    width: 100%;
-`;
-
 export const CenterContainer = styled.div`
     max-width: 600px;
     min-width: 300px;
+    margin-right: 10px;
+    margin-left: 10px;
     width: 100%;
+    height: 100%;
+    display: table;
     border-right: 1px solid ${borderGray};
     border-left: 1px solid ${borderGray};
+
+    > div {
+        height: 100%;
+    }
 `;
 
 export const RightContainer = styled.div`
-    width: 100%;
-    margin-left: 10px;
+    width: 50%;
 
     > div {
         width: 350px;

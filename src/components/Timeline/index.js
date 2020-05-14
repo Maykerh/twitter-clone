@@ -38,6 +38,39 @@ const fakeData = [
         retweets: 10000,
         likes: 1000000,
     },
+    {
+        name: "Mutley",
+        avatarUrl: null,
+        userName: "@Mutley",
+        date: new Date(),
+        description:
+            "Ten the hastened steepest feelings pleasant few surprise property. An brother he do colonel against minutes uncivil. Can how elinor warmly mrs basket marked. Led raising expense yet demesne weather musical. Me mr what park next busy ever.",
+        comments: 2000,
+        retweets: 10000,
+        likes: 1000000,
+    },
+    {
+        name: "Mutley",
+        avatarUrl: null,
+        userName: "@Mutley",
+        date: new Date(),
+        description:
+            "Ten the hastened steepest feelings pleasant few surprise property. An brother he do colonel against minutes uncivil. Can how elinor warmly mrs basket marked. Led raising expense yet demesne weather musical. Me mr what park next busy ever.",
+        comments: 2000,
+        retweets: 10000,
+        likes: 1000000,
+    },
+    {
+        name: "Mutley",
+        avatarUrl: null,
+        userName: "@Mutley",
+        date: new Date(),
+        description:
+            "Ten the hastened steepest feelings pleasant few surprise property. An brother he do colonel against minutes uncivil. Can how elinor warmly mrs basket marked. Led raising expense yet demesne weather musical. Me mr what park next busy ever.",
+        comments: 2000,
+        retweets: 10000,
+        likes: 1000000,
+    },
 ];
 
 function Timeline() {

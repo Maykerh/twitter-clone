@@ -28,5 +28,6 @@ module.exports = {
         "jsx-a11y/click-events-have-key-events": "off",
         "react/button-has-type": "off",
         "react/no-array-index-key": "off",
+        "no-plusplus": "off",
     },
 };

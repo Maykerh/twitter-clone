@@ -4,7 +4,7 @@ import { Container } from "./styles";
 
 function ContentHeader({ title }) {
     return (
-        <Container>
+        <Container className="vertical-fixed">
             <span>{title}</span>
         </Container>
     );
