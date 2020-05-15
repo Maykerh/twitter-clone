@@ -47,7 +47,7 @@ function EditModal({ data, isOpen, onClose, afterSave }) {
     function onSave() {
         db.ref(`/users/${data.id}`).update({ name, description, location, avatar, cover });
 
-        afterSave({ name, description, location, avatar });
+        afterSave({ name, description, location, avatar, cover });
     }
 
     return (

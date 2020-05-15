@@ -7,7 +7,7 @@ import "./styles/global.css";
 
 function App() {
     (function fakeLogin() {
-        db.ref("/users/1")
+        db.ref("/users/0")
             .once("value")
             .then(snapshot => {
                 const { name, userName, avatar } = snapshot.val();

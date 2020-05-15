@@ -36,7 +36,9 @@ function UserProfile() {
 
     useEffect(() => {
         const loadUserData = () => {
-            db.ref("/users/1")
+            const userId = JSON.parse(localStorage.getItem("twt-session")).id;
+
+            db.ref(`/users/${userId}`)
                 .once("value")
                 .then(snapshot => {
                     const data = snapshot.val();
@@ -91,7 +93,7 @@ function UserProfile() {
             />
             <ContentHeader title={userData.name} />
             <ContentWrapper>
-                <Cover src={userData.cover} />
+                <Cover src={userData.cover || null} />
                 <AvatarWrapper>
                     <Avatar
                         url={userData.avatar}
@@ -110,7 +112,7 @@ function UserProfile() {
                     <UserName>
                         {`@${userData.userName}`}
                         {" - "}
-                        <span id="counter">{`${userData.tweets} tweets`}</span>{" "}
+                        <span id="counter">{`${userData.tweets || 0} tweets`}</span>{" "}
                     </UserName>
                     <Description>{userData.description}</Description>
                     <Location>
