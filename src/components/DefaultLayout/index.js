@@ -1,12 +1,22 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import { GrTwitter } from "react-icons/gr";
 import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
 
+import SidePanel from "../SidePanel";
+
 import { primaryBlue } from "../../styles/variables";
 
-import { AppContainer, MenuContainer, Menu, MenuItem, ContentContainer } from "./styles";
+import {
+    AppContainer,
+    MenuContainer,
+    Menu,
+    MenuItem,
+    ContentContainer,
+    CenterContainer,
+    RightContainer,
+} from "./styles";
 
 function DefaultLayout({ children }) {
     return (
@@ -38,7 +48,12 @@ function DefaultLayout({ children }) {
                     </MenuItem>
                 </Menu>
             </MenuContainer>
-            <ContentContainer id="scrollable-area">{children}</ContentContainer>
+            <ContentContainer id="scrollable-area">
+                <CenterContainer>{children}</CenterContainer>
+                <RightContainer className={"vertical-fixed"} id={"side-panel"}>
+                    <SidePanel />
+                </RightContainer>
+            </ContentContainer>
         </AppContainer>
     );
 }

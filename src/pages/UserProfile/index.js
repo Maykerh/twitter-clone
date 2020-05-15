@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 
 import { BsCalendar } from "react-icons/bs";
 import { GrLocation } from "react-icons/gr";
 
-import ContentLayout from "../../components/ContentLayout";
 import ContentHeader from "../../components/ContentHeader";
 import Avatar from "../../components/Avatar";
 import Button from "../../components/Button";
-import Modal from "../../components/Modal";
-import Input from "../../components/Input";
-import AvatarInput from "../../components/AvatarInput";
+import EditModal from "./EditModal";
 
 import {
+    Container,
     ContentWrapper,
     Cover,
     AvatarWrapper,
@@ -44,7 +41,7 @@ const fakeUserData = {
 
 function UserProfile() {
     const [userData, setUserData] = useState({});
-    const [isModalOpen, setIsModalOpen] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -59,10 +56,11 @@ function UserProfile() {
         setIsLoading(false);
     }, []);
 
-    const ProfileComponent = isLoading ? (
+    return isLoading ? (
         <div>Carregando...</div>
     ) : (
-        <div id="temp">
+        <Container>
+            <EditModal data={userData} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
             <ContentHeader title={userData.name} />
             <ContentWrapper>
                 <Cover />
@@ -81,7 +79,11 @@ function UserProfile() {
                 </AvatarWrapper>
                 <InfoWrapper>
                     <Name>{userData.name}</Name>
-                    <UserName>{userData.userName}</UserName>
+                    <UserName>
+                        {userData.userName}
+                        {" - "}
+                        <span id="counter">{`${userData.tweets} tweets`}</span>{" "}
+                    </UserName>
                     <Description>{userData.description}</Description>
                     <Location>
                         <GrLocation size={18} />
@@ -134,40 +136,7 @@ function UserProfile() {
                 </ViewList>
                 <Timeline />
             </ContentWrapper>
-        </div>
-    );
-
-    function getViewContent() {
-        return (
-            <div>
-                <AvatarInput />
-                <Input labelText="Name" name="name" value={userData.name} />
-                <Input labelText="Bio" name="name" value={userData.description} />
-                <Input labelText="Location" name="name" value={userData.location} />
-            </div>
-        );
-    }
-
-    function onEdit() {
-        setIsModalOpen(true);
-    }
-
-    return (
-        <>
-            <ContentLayout
-                centerComponent={ProfileComponent}
-                rightComponent={<div>{"COnteudo"}</div>}
-            />
-            <Modal
-                title={"Edit profile"}
-                getContent={getViewContent}
-                isOpen={isModalOpen}
-                onSave={data => console.log(["salvou", data])}
-                onClose={() => setIsModalOpen(false)}
-                width={70}
-                height={70}
-            />
-        </>
+        </Container>
     );
 }
 

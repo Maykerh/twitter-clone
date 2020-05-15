@@ -1,4 +1,5 @@
 import React from "react";
+import { formatDistanceToNow } from "date-fns";
 
 import { AiOutlineRetweet, AiOutlineHeart } from "react-icons/ai";
 import { BsChat, BsUpload } from "react-icons/bs";
@@ -13,7 +14,8 @@ function TweetCard({ data }) {
             <Avatar />
             <TweetContent>
                 <TweetHeader>
-                    <span>{data.name}</span> {`${data.userName} - ${data.date}`}
+                    <span>{data.name}</span>{" "}
+                    {`${data.userName} - ${formatDistanceToNow(new Date(data.date))}`}
                 </TweetHeader>
                 <TweetText>{data.description}</TweetText>
                 <TweetFooter>
@@ -40,9 +42,7 @@ function TweetCard({ data }) {
                             <BsUpload size={18} />
                         </div>
                     </FooterBtn>
-                    <FooterBtn>
-                        <div />
-                    </FooterBtn>
+                    <FooterBtn />
                 </TweetFooter>
             </TweetContent>
         </Container>

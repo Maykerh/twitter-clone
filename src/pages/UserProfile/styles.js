@@ -7,8 +7,8 @@ import {
 } from "../../styles/variables";
 
 export const Container = styled.div`
-    margin-top: 10px;
     display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
 
@@ -68,6 +68,10 @@ export const UserName = styled.span`
     color: ${secondaryFontColor};
     font-size: 18px;
     margin-bottom: 10px;
+
+    > span {
+        font-size: 14px;
+    }
 `;
 
 export const Description = styled.span`
@@ -75,7 +79,6 @@ export const Description = styled.span`
 `;
 
 export const DateJoined = styled.div`
-    color: ${secondaryFontColor};
     margin-bottom: 10px;
     display: flex;
     align-items: center;
@@ -85,6 +88,7 @@ export const DateJoined = styled.div`
     }
 
     > span {
+        color: ${secondaryFontColor};
         font-size: 18px;
     }
 `;
@@ -100,6 +104,7 @@ export const Location = styled.div`
     }
 
     > span {
+        color: ${secondaryFontColor};
         font-size: 18px;
     }
 `;

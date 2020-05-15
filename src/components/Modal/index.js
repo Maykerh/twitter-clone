@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
-import { useEffect } from "react";
 
 import { MdClose } from "react-icons/md";
 
-import { Container, Header, Title } from "./styles";
+import { Container, Header } from "./styles";
 import Button from "../Button";
 
 export default function MyModal({ title, getContent, isOpen, onClose, onSave, width, height }) {

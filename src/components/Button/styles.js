@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { primaryBlue, secondaryBlue } from "../../styles/variables";
 
 export const Container = styled.button`
     width: ${props => (props.width ? props.width : null)};

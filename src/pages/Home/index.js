@@ -1,13 +1,12 @@
 import React from "react";
 
-import ContentLayout from "../../components/ContentLayout";
 import ContentHeader from "../../components/ContentHeader";
 import Timeline from "../../components/Timeline";
 import TweetInput from "../../components/TweetInput";
 
-import { Container, RightContainer, CenterContainer, ContentWrapper } from "./styles";
+import { Container, ContentWrapper } from "./styles";
 
-const Home = props => {
+const Home = () => {
     function getAvatarUrl() {
         return JSON.parse(localStorage.getItem("twt-profile")).avatarUrl;
     }
@@ -16,18 +15,14 @@ const Home = props => {
         return JSON.parse(localStorage.getItem("twt-profile")).name;
     }
 
-    const HomeComponent = (
-        <div>
+    return (
+        <Container>
             <ContentHeader title={"Home"} />
             <ContentWrapper>
                 <TweetInput avatarUrl={getAvatarUrl()} name={getUserName()} />
                 <Timeline />
             </ContentWrapper>
-        </div>
-    );
-
-    return (
-        <ContentLayout centerComponent={HomeComponent} rightComponent={<div>{"COnteudo"}</div>} />
+        </Container>
     );
 };
 

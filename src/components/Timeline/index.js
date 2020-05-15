@@ -9,7 +9,7 @@ const fakeData = [
         name: "Mayke",
         avatarUrl: null,
         userName: "@Mayke",
-        date: new Date(),
+        date: new Date(2020, 4, 13, 10, 55, 50),
         description:
             "Carriage quitting securing be appetite it declared. High eyes kept so busy feel call in",
         comments: 5,
@@ -77,8 +77,8 @@ function Timeline() {
     function renderTimelineContent() {
         const timelineContent = fakeData;
 
-        return timelineContent.map(tweet => (
-            <CardWrapper>
+        return timelineContent.map((tweet, index) => (
+            <CardWrapper key={index}>
                 <TweetCard data={tweet} />
             </CardWrapper>
         ));
