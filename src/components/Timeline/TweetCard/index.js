@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { formatDistanceToNow } from "date-fns";
 
 import { AiOutlineRetweet, AiOutlineHeart } from "react-icons/ai";
@@ -48,5 +49,17 @@ function TweetCard({ data }) {
         </Container>
     );
 }
+
+TweetCard.propTypes = {
+    data: PropTypes.shape({
+        name: PropTypes.string,
+        userName: PropTypes.string,
+        date: PropTypes.number,
+        description: PropTypes.string,
+        comments: PropTypes.number,
+        retweets: PropTypes.number,
+        likes: PropTypes.number,
+    }).isRequired,
+};
 
 export default TweetCard;

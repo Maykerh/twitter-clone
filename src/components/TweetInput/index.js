@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import TextareaAutosize from "react-autosize-textarea";
 
 import Avatar from "../Avatar";
@@ -32,5 +33,11 @@ function TweetInput({ avatarUrl, userName, onTweet }) {
         </Container>
     );
 }
+
+TweetInput.propTypes = {
+    avatarUrl: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired,
+    onTweet: PropTypes.func.isRequired,
+};
 
 export default TweetInput;

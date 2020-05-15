@@ -3,10 +3,8 @@ import styled from "styled-components";
 import {
     borderGray,
     secondaryFontColor,
-    backgroundGray,
     backgroundGrayHover,
     primaryFontColor,
-    primaryBlue,
 } from "../../../styles/variables";
 
 export const Container = styled.div`

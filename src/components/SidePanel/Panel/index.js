@@ -8,7 +8,7 @@ function Panel({ children }) {
             <Header>{"What's happening"}</Header>
             {children}
             <Footer onClick={() => alert("not implemented")}>
-                <a href="#">
+                <a href="##">
                     <div>Show more</div>
                 </a>
             </Footer>

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {
     borderGray,
     secondaryFontColor,
-    backgroundGray,
     backgroundGrayHover,
     primaryFontColor,
     primaryBlue,

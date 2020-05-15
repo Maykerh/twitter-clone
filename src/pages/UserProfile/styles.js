@@ -21,8 +21,9 @@ export const ContentWrapper = styled.div`
     box-sizing: border-box;
 `;
 
-export const Cover = styled.div`
+export const Cover = styled.img`
     height: 200px;
+    width: 100%;
     background-color: ${primaryBlue};
 `;
 

@@ -20,6 +20,7 @@ export default function MyModal({ title, getContent, isOpen, onClose, onSave, wi
                 isOpen={isModalOpen}
                 onRequestClose={onClose}
                 shouldCloseOnOverlayClick
+                ariaHideApp={false}
                 style={{
                     content: {
                         width: `${width}%`,

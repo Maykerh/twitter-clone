@@ -9,6 +9,7 @@ import { db } from "../../firebase";
 import ContentHeader from "../../components/ContentHeader";
 import Avatar from "../../components/Avatar";
 import Button from "../../components/Button";
+import Loading from "../../components/Loading";
 import EditModal from "./EditModal";
 
 import {
@@ -64,17 +65,36 @@ function UserProfile() {
         loadUserTweets();
     }, [userData]);
 
-    return isLoading ? (
-        <div>Carregando...</div>
-    ) : (
+    function getFormattedDate(timestamp) {
+        return (
+            timestamp &&
+            format(new Date(timestamp), "'Joined' MMMM yyyy", {
+                locale: enUS,
+            })
+        );
+    }
+
+    function notImplemented() {
+        alert("Not implemented");
+    }
+
+    return Object.keys(userData).length === 0 ? null : (
         <Container>
-            <EditModal data={userData} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <EditModal
+                data={userData}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                afterSave={newData => {
+                    setUserData({ ...userData, ...newData });
+                    setIsModalOpen(false);
+                }}
+            />
             <ContentHeader title={userData.name} />
             <ContentWrapper>
-                <Cover />
+                <Cover src={userData.cover} />
                 <AvatarWrapper>
                     <Avatar
-                        url={userData.avatarUrl}
+                        url={userData.avatar}
                         name={userData.name}
                         width={"150px"}
                         height={"150px"}
@@ -88,7 +108,7 @@ function UserProfile() {
                 <InfoWrapper>
                     <Name>{userData.name}</Name>
                     <UserName>
-                        {userData.userName}
+                        {`@${userData.userName}`}
                         {" - "}
                         <span id="counter">{`${userData.tweets} tweets`}</span>{" "}
                     </UserName>
@@ -99,11 +119,7 @@ function UserProfile() {
                     </Location>
                     <DateJoined>
                         <BsCalendar size={18} />
-                        <span>
-                            {format(userData.dateJoined, "'Joined' MMMM yyyy", {
-                                locale: enUS,
-                            })}
-                        </span>
+                        <span>{getFormattedDate(userData.dateJoined)}</span>
                     </DateJoined>
                     <div>
                         <Status>
@@ -120,29 +136,21 @@ function UserProfile() {
                     <div>
                         <span>Tweets</span>
                     </div>
-                    <div
-                        onClick={() => {
-                            alert("not implemented");
-                        }}
-                    >
+                    <div onClick={notImplemented}>
                         <span>Tweets & replies</span>
                     </div>
-                    <div
-                        onClick={() => {
-                            alert("not implemented");
-                        }}
-                    >
+                    <div onClick={notImplemented}>
                         <span>Media</span>
                     </div>
-                    <div
-                        onClick={() => {
-                            alert("not implemented");
-                        }}
-                    >
+                    <div onClick={notImplemented}>
                         <span>Likes</span>
                     </div>
                 </ViewList>
-                <Timeline timelineData={timelineData} />
+                {isLoading || timelineData.length === 0 ? (
+                    <Loading />
+                ) : (
+                    <Timeline timelineData={timelineData} />
+                )}
             </ContentWrapper>
         </Container>
     );

@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { borderGray } from "../../styles/variables";
 
 export const Container = styled.div`
     display: flex;
-    margin-bottom: 30px;
     justify-content: center;
+    height: ${props => props.height};
+    width: ${props => props.width};
 
     label {
-        height: 120px;
-        width: 120px;
+        height: 100%;
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -19,10 +19,10 @@ export const Container = styled.div`
         }
 
         img {
-            height: 120px;
-            width: 120px;
-            border-radius: 50%;
-            border: 2px solid ${borderGray};
+            height: 100%;
+            width: 100%;
+            border-radius: ${props => (props.isRound ? "50%" : null)};
+            border: 5px solid #fff;
         }
 
         input {
@@ -32,13 +32,14 @@ export const Container = styled.div`
 `;
 
 export const EmptyImg = styled.div`
-    height: 120px;
-    width: 120px;
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    border-radius: ${props => (props.isRound ? "50%" : null)};
     background-color: #eee;
+    border: 5px solid #fff;
 
     > svg {
         position: absolute;

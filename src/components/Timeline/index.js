@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import TweetCard from "./TweetCard";
 
@@ -19,5 +20,9 @@ function Timeline({ timelineData }) {
 
     return <Container>{renderTimelineContent()}</Container>;
 }
+
+Timeline.propTypes = {
+    timelineData: PropTypes.array.isRequired,
+};
 
 export default Timeline;

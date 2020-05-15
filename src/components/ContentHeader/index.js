@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Container } from "./styles";
 
@@ -9,5 +10,9 @@ function ContentHeader({ title }) {
         </Container>
     );
 }
+
+ContentHeader.propTypes = {
+    title: PropTypes.string.isRequired,
+};
 
 export default ContentHeader;

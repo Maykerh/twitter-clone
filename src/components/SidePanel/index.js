@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import Panel from "./Panel";
 import NewsCard from "./NewsCard";
@@ -52,7 +52,7 @@ function SidePanel() {
                         key={index}
                         id={data.id}
                         topic={data.topic}
-                        time={data.time}
+                        timeString={data.time}
                         text={data.text}
                         onClick={onClickCard}
                     />
@@ -65,7 +65,7 @@ function SidePanel() {
                         id={data.id}
                         name={data.name}
                         userName={data.userName}
-                        onClick={onClickCard}
+                        onClickCard={onClickCard}
                         onFollow={onClickCard}
                     />
                 ))}

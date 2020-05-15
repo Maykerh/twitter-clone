@@ -5,6 +5,7 @@ import { db } from "../../firebase";
 import ContentHeader from "../../components/ContentHeader";
 import Timeline from "../../components/Timeline";
 import TweetInput from "../../components/TweetInput";
+import Loading from "../../components/Loading";
 
 import { Container, ContentWrapper } from "./styles";
 
@@ -58,21 +59,32 @@ const Home = () => {
                 setTimelineData(newData);
 
                 db.ref(`/fakeTimeline`).push(tweetData);
+                db.ref(`/users/${userData.id}/tweets`)
+                    .once("value")
+                    .then(snapshot => {
+                        const tweetCount = snapshot.val();
+
+                        db.ref(`/users/${userData.id}`).update({ tweets: tweetCount + 1 });
+                    });
             });
     }
 
-    return isLoading ? (
+    return isLoading || !timelineData ? (
         <div>Carregando...</div>
     ) : (
         <Container>
             <ContentHeader title={"Home"} />
             <ContentWrapper>
                 <TweetInput
-                    avatarUrl={userData.avatarUrl}
-                    name={userData.name}
+                    avatarUrl={userData.avatar}
+                    userName={userData.name}
                     onTweet={postTweet}
                 />
-                <Timeline timelineData={timelineData} />
+                {isLoading || timelineData.length === 0 ? (
+                    <Loading />
+                ) : (
+                    <Timeline timelineData={timelineData} />
+                )}
             </ContentWrapper>
         </Container>
     );

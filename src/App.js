@@ -9,12 +9,12 @@ function App() {
     (function fakeLogin() {
         db.ref("/users/1")
             .once("value")
-            .then((snapshot) => {
-                const { name, userName, avatarUrl } = snapshot.val();
+            .then(snapshot => {
+                const { name, userName, avatar } = snapshot.val();
 
                 localStorage.setItem(
                     "twt-session",
-                    JSON.stringify({ name, userName, avatarUrl, id: snapshot.key })
+                    JSON.stringify({ name, userName, avatar, id: snapshot.key })
                 );
             });
     })();

@@ -1,15 +1,32 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Wrapper, StyledInput, Label } from "./styles";
 
-export default props => {
-    if (props.labelText) {
-        return (
-            <Wrapper>
-                <Label htmlFor={props.name}>{props.labelText}</Label>
-                <StyledInput {...props} />
-            </Wrapper>
-        );
+function Input({ name, labelText, value, onChange }) {
+    function handleChange(newValue) {
+        onChange(newValue.target.value);
     }
-    return <StyledInput {...props} />;
+
+    return (
+        <Wrapper>
+            <Label htmlFor={name}>{labelText}</Label>
+            <StyledInput onChange={handleChange} value={value} />
+        </Wrapper>
+    );
+}
+
+Input.defaultProps = {
+    name: null,
+    labelText: null,
+    value: "",
 };
+
+Input.propTypes = {
+    name: PropTypes.string,
+    labelText: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+};
+
+export default Input;
