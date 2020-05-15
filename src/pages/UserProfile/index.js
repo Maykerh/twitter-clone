@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { format } from "date-fns";
-import { enUS } from "date-fns/locale";
-
+import _ from "lodash";
 import { BsCalendar } from "react-icons/bs";
 import { GrLocation } from "react-icons/gr";
+import { format } from "date-fns";
+import { enUS } from "date-fns/locale";
+import { db } from "../../firebase";
 
 import ContentHeader from "../../components/ContentHeader";
 import Avatar from "../../components/Avatar";
@@ -26,35 +27,42 @@ import {
 } from "./styles";
 import Timeline from "../../components/Timeline";
 
-const fakeUserData = {
-    name: "Mayke",
-    userName: "@Mayke",
-    description: "Sei la a descrição",
-    dateJoined: new Date(2020, 3, 1),
-    avatarUrl:
-        "https://pbs.twimg.com/profile_images/1389213280/OgAAANmkk6Kx8ebiAORq1MgHAYu30W90u6PTs0A4Z6qiLeneJ485Mh42Cn2EZoS5OTTR7AlDQRGU5i1ilJejOpnFsfMAm1T1UNriALlCN4ZHqt5Te21nfh-IMrHR_400x400.jpg",
-    tweets: 501,
-    location: "Joinville",
-    following: 150,
-    followers: 200,
-};
-
 function UserProfile() {
     const [userData, setUserData] = useState({});
+    const [timelineData, setTimelineData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        setIsLoading(true);
-
         const loadUserData = () => {
-            setUserData(fakeUserData);
+            db.ref("/users/1")
+                .once("value")
+                .then(snapshot => {
+                    const data = snapshot.val();
+
+                    setUserData({ ...data, id: snapshot.key });
+                });
         };
 
         loadUserData();
-
-        setIsLoading(false);
     }, []);
+
+    useEffect(() => {
+        const loadUserTweets = () => {
+            setIsLoading(true);
+
+            db.ref(`/tweets/${userData.id}`)
+                .once("value")
+                .then(snapshot => {
+                    const data = snapshot.val();
+
+                    setTimelineData(_.toArray(data).reverse());
+                    setIsLoading(false);
+                });
+        };
+
+        loadUserTweets();
+    }, [userData]);
 
     return isLoading ? (
         <div>Carregando...</div>
@@ -134,7 +142,7 @@ function UserProfile() {
                         <span>Likes</span>
                     </div>
                 </ViewList>
-                <Timeline />
+                <Timeline timelineData={timelineData} />
             </ContentWrapper>
         </Container>
     );

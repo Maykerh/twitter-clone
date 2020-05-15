@@ -6,7 +6,7 @@ import Button from "../Button";
 
 import { Container, FooterOptions } from "./styles";
 
-function TweetInput({ avatarUrl, userName }) {
+function TweetInput({ avatarUrl, userName, onTweet }) {
     const [tweet, setTweet] = useState("");
 
     return (
@@ -20,7 +20,13 @@ function TweetInput({ avatarUrl, userName }) {
                     onChange={e => setTweet(e.target.value)}
                 />
                 <FooterOptions>
-                    <Button text={"Tweet"} />
+                    <Button
+                        text={"Tweet"}
+                        onClick={() => {
+                            onTweet(tweet);
+                            setTweet("");
+                        }}
+                    />
                 </FooterOptions>
             </div>
         </Container>
