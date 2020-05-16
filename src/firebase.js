@@ -7,9 +7,10 @@ export const firebaseImpl = firebase.initializeApp(firebaseConfig);
 export const db = firebase.database();
 
 /**
- * Populando a base com um usuário ao menos
+ * Codigo extra para popular a base com os dados iniciais
+ * Faz um reload da página ao abrir a primeira vez caso não tenha os dados do usuario na base
+ * Não estaria aqui em uma aplicação real :P
  */
-
 const initialData = {
     fakeTimeline: {
         "0": {
@@ -112,6 +113,10 @@ db.ref(`/users`)
         const users = snapshot.val();
 
         if (_.toArray(users).length === 0) {
-            db.ref("/").set(initialData);
+            db.ref("/")
+                .set(initialData)
+                .then(() => {
+                    window.location.reload();
+                });
         }
     });

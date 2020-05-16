@@ -33,8 +33,8 @@ function EditModal({ data, isOpen, onClose, afterSave }) {
                         base64Image={avatar}
                         onChange={image64 => setAvatar(image64)}
                         isRound
-                        width={"120px"}
-                        height={"120px"}
+                        width={"130px"}
+                        height={"130px"}
                     />
                 </div>
                 <Input labelText="Name" value={name} onChange={setName} />

@@ -18,9 +18,44 @@ import {
     RightContainer,
 } from "./styles";
 
+/**
+ * Ajusta a posição dos elementos fixos da página de acordo com o scroll principal
+ */
+function handlePageScroll() {
+    const fixedElements = document.getElementsByClassName("vertical-fixed");
+    const scrollableAra = document.getElementById("scrollable-area");
+
+    for (let i = 0; i < fixedElements.length; i++) {
+        fixedElements[i].style.transform = `translate3d(0, ${scrollableAra.scrollTop}px, 0)`;
+    }
+
+    /**
+     * Caso o conteúdo do painel da direita esteja cortado, faz o scroll somente no painel
+     * ao rolar pra cima ou pra baixo a partir de qualquer posição na página
+     */
+    if (scrollableAra.scrollTop > window.lastScrollTop) {
+        document.getElementById("side-panel").scrollTop +=
+            scrollableAra.scrollTop - window.lastScrollTop;
+    } else {
+        document.getElementById("side-panel").scrollTop -=
+            window.lastScrollTop - scrollableAra.scrollTop;
+    }
+
+    window.lastScrollTop = scrollableAra.scrollTop;
+}
+
+/**
+ * Adiciona os eventos globais
+ */
+function addEventListeners() {
+    const scrollableAra = document.getElementById("scrollable-area");
+
+    scrollableAra && scrollableAra.addEventListener("scroll", handlePageScroll);
+}
+
 function DefaultLayout({ children }) {
     return (
-        <AppContainer id={"app-container"}>
+        <AppContainer id={"app-container"} onLoad={addEventListeners}>
             <MenuContainer>
                 <Menu>
                     <MenuItem>

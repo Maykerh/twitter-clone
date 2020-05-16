@@ -40,6 +40,7 @@ export const EmptyImg = styled.div`
     border-radius: ${props => (props.isRound ? "50%" : null)};
     background-color: #eee;
     border: 5px solid #fff;
+    box-sizing: border-box;
 
     > svg {
         position: absolute;
