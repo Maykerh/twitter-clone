@@ -28,10 +28,11 @@ import {
 } from "./styles";
 import Timeline from "../../components/Timeline";
 
-function UserProfile() {
+function UserProfile(props) {
     const [userData, setUserData] = useState({});
     const [timelineData, setTimelineData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLoadingUser, setIsLoadingUser] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -44,6 +45,7 @@ function UserProfile() {
                     const data = snapshot.val();
 
                     setUserData({ ...data, id: snapshot.key });
+                    setIsLoadingUser(false);
                 });
         };
 
@@ -52,8 +54,6 @@ function UserProfile() {
 
     useEffect(() => {
         const loadUserTweets = () => {
-            setIsLoading(true);
-
             db.ref(`/tweets/${userData.id}`)
                 .once("value")
                 .then(snapshot => {
@@ -80,16 +80,30 @@ function UserProfile() {
         alert("Not implemented");
     }
 
-    return Object.keys(userData).length === 0 ? null : (
+    function afterSaveUserData(newData) {
+        setUserData({ ...userData, ...newData });
+        setIsModalOpen(false);
+
+        localStorage.setItem(
+            "twt-session",
+            JSON.stringify({
+                name: newData.name,
+                userName: newData.userName,
+                avatar: newData.avatar,
+                id: userData.id,
+            })
+        );
+    }
+
+    return isLoadingUser ? (
+        <Loading />
+    ) : (
         <Container>
             <EditModal
                 data={userData}
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                afterSave={newData => {
-                    setUserData({ ...userData, ...newData });
-                    setIsModalOpen(false);
-                }}
+                afterSave={afterSaveUserData}
             />
             <ContentHeader title={userData.name} />
             <ContentWrapper>

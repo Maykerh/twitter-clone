@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 
 import { GrTwitter } from "react-icons/gr";
@@ -18,42 +18,52 @@ import {
     RightContainer,
 } from "./styles";
 
-/**
- * Ajusta a posição dos elementos fixos da página de acordo com o scroll principal
- */
-function handlePageScroll() {
-    const fixedElements = document.getElementsByClassName("vertical-fixed");
-    const scrollableAra = document.getElementById("scrollable-area");
+function DefaultLayout({ children, location }) {
+    const scrollableAreaRef = useRef();
 
-    for (let i = 0; i < fixedElements.length; i++) {
-        fixedElements[i].style.transform = `translate3d(0, ${scrollableAra.scrollTop}px, 0)`;
+    /**
+     * Ajusta a posição dos elementos fixos da página de acordo com o scroll principal
+     */
+    function handlePageScroll() {
+        const fixedElements = document.getElementsByClassName("vertical-fixed");
+        const scrollableArea = scrollableAreaRef.current;
+
+        for (let i = 0; i < fixedElements.length; i++) {
+            fixedElements[i].style.transform = `translate3d(0, ${scrollableArea.scrollTop}px, 0)`;
+        }
+
+        /**
+         * Caso o conteúdo do painel da direita esteja cortado, faz o scroll somente no painel
+         * ao rolar pra cima ou pra baixo a partir de qualquer posição na página
+         */
+        if (scrollableArea.scrollTop > window.lastScrollTop) {
+            document.getElementById("side-panel").scrollTop +=
+                scrollableArea.scrollTop - window.lastScrollTop;
+        } else {
+            document.getElementById("side-panel").scrollTop -=
+                window.lastScrollTop - scrollableArea.scrollTop;
+        }
+
+        window.lastScrollTop = scrollableArea.scrollTop;
     }
 
     /**
-     * Caso o conteúdo do painel da direita esteja cortado, faz o scroll somente no painel
-     * ao rolar pra cima ou pra baixo a partir de qualquer posição na página
+     * Adiciona os eventos globais
      */
-    if (scrollableAra.scrollTop > window.lastScrollTop) {
-        document.getElementById("side-panel").scrollTop +=
-            scrollableAra.scrollTop - window.lastScrollTop;
-    } else {
-        document.getElementById("side-panel").scrollTop -=
-            window.lastScrollTop - scrollableAra.scrollTop;
+    function addEventListeners() {
+        scrollableAreaRef.current &&
+            scrollableAreaRef.current.addEventListener("scroll", handlePageScroll);
     }
 
-    window.lastScrollTop = scrollableAra.scrollTop;
-}
+    /**
+     * Reseta o scroll ao trocar de pagina para ajustar o translate dos elementos fixos
+     */
+    function resetScroll() {
+        if (scrollableAreaRef.current) {
+            scrollableAreaRef.current.scrollTop = 0;
+        }
+    }
 
-/**
- * Adiciona os eventos globais
- */
-function addEventListeners() {
-    const scrollableAra = document.getElementById("scrollable-area");
-
-    scrollableAra && scrollableAra.addEventListener("scroll", handlePageScroll);
-}
-
-function DefaultLayout({ children }) {
     return (
         <AppContainer id={"app-container"} onLoad={addEventListeners}>
             <MenuContainer>
@@ -65,7 +75,7 @@ function DefaultLayout({ children }) {
                             </div>
                         </Link>
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem active={location.pathname === "/"}>
                         <Link to={"/"}>
                             <div>
                                 <AiOutlineHome size={32} />
@@ -73,7 +83,7 @@ function DefaultLayout({ children }) {
                             </div>
                         </Link>
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem active={location.pathname === "/user-profile"}>
                         <Link to={"/user-profile"}>
                             <div>
                                 <AiOutlineUser size={32} />
@@ -83,7 +93,7 @@ function DefaultLayout({ children }) {
                     </MenuItem>
                 </Menu>
             </MenuContainer>
-            <ContentContainer id="scrollable-area">
+            <ContentContainer id="scrollable-area" ref={scrollableAreaRef} onLoad={resetScroll}>
                 <CenterContainer>{children}</CenterContainer>
                 <RightContainer className={"vertical-fixed"} id={"side-panel"}>
                     <SidePanel />

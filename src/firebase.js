@@ -1,4 +1,5 @@
-import firebase from "firebase";
+import * as firebase from "firebase/app";
+import "firebase/database";
 import _ from "lodash";
 
 import { firebaseConfig } from "./firebaseConfig";

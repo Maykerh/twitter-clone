@@ -69,15 +69,13 @@ const Home = () => {
             });
     }
 
-    return isLoading || !timelineData ? (
-        <div>Carregando...</div>
-    ) : (
+    return (
         <Container>
             <ContentHeader title={"Home"} />
             <ContentWrapper>
                 <TweetInput
-                    avatarUrl={userData.avatar}
-                    userName={userData.name}
+                    avatarUrl={userData.avatar || ""}
+                    userName={userData.name || ""}
                     onTweet={postTweet}
                 />
                 {isLoading || timelineData.length === 0 ? (

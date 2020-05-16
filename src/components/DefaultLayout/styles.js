@@ -35,6 +35,7 @@ export const CenterContainer = styled.div`
     min-width: 300px;
     width: 60%;
     height: 100%;
+    min-height: 850px;
     display: table;
     border-right: 1px solid ${borderGray};
     border-left: 1px solid ${borderGray};
@@ -75,6 +76,7 @@ export const MenuItem = styled.div`
     user-select: none;
     cursor: pointer;
     margin-bottom: 5px;
+    color: ${props => (props.active ? primaryBlue : null)};
 
     @media (max-width: 1300px) {
         display: flex;
