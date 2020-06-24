@@ -1,10 +1,14 @@
+## Description
+
+This project consists in a clone of Twitter's interface, developed with React in the front-end, and Firebase in the back-end.
+
+It has only few functionalities, like responsive layout, post tweets, add user image and cover, view and edit user profile, and a mocked timeline.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 ## Live demo
 
 https://5ebffcbd496fb58ee61e1ef5--fera-twitter-mayke.netlify.app
-
-## Description
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
